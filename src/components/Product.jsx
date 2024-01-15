@@ -6,7 +6,7 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 
 function Product(props) {
   console.log(props.data);
-  const { id, name, price, image } = props.data;
+  const { id, name, price, image, description } = props.data;
   const {addToCart, cartItems} = useContext(ShopContext);
   
   return (
@@ -15,8 +15,9 @@ function Product(props) {
         <img className=" hover:scale-100 border-cyan-300 border-2" width={200} src={image} alt={name} />
         <h2 className="text-2xl font-semibold mt-4">{name}</h2>
         <p className=" p-2">{price} SEK</p>
-        <p className=" text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quos veniam veritatis, odio inventore, ullam labore voluptas tempore officia sequi aperiam..... <span className=" font-semibold">more</span> </p>
-        <div className="flex text-sm gap-2 mt-4">
+        {/* <p className=" text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quos veniam veritatis, odio inventore, ullam labore voluptas tempore officia sequi aperiam..... <span className=" font-semibold">more</span> </p> */}
+        <p className=" text-sm">{description.substring(0, 75)+'...'} </p>
+        <div className="flex text-sm gap-2 mt-6">
         <button className=" btn flex justify-center gap-1"
           onClick={(e) => {
             e.preventDefault();

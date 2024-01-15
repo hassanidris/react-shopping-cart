@@ -6,6 +6,8 @@ import { products } from "../data";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../context/ShopContextProvider";
+import { TiShoppingCart } from "react-icons/ti";
+import { TbShoppingBagSearch } from "react-icons/tb";
 
 const ItemPage = () => {
   const {cartItems, addToCart} = useContext(ShopContext);
@@ -41,16 +43,12 @@ const ItemPage = () => {
             <p>---</p>
             <p>{description}</p>
           </div>
-          <div className=" flex justify-end gap-3 text-center">
-            <button className="btn mt-3"
-            onClick={(e) => {
-              e.preventDefault();
-              addToCart(id);
-            }}
-                    >
-            + Add to cart
-                    </button>
-                    <button className="btn mt-3" onClick={() => navigate('/')}>Contiune Shopping</button>
+          <div className=" flex justify-end gap-3">
+          <button className="btn flex justify-center gap-1" onClick={(e) => {
+            e.preventDefault();
+            addToCart(id);
+          }}><TiShoppingCart size={20} /><span>Add to cart</span></button>
+              <button className="btn flex justify-center gap-1" onClick={() => navigate('/')}> <TbShoppingBagSearch size={20} /><span>Contiune Shopping</span></button>
           </div>
           {/* You can add more details here based on your product structure */}
         </div>

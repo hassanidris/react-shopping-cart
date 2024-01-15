@@ -13,7 +13,7 @@ function App() {
   
 
   return (
-    <div className=" flex flex-col items-center h-screen justify-between">
+    <div className=" flex flex-col items-center h-screen justify-between gap-8">
       <ShopContextProvider>
       <BrowserRouter>
         <Header />

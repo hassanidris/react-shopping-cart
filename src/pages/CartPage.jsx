@@ -4,6 +4,8 @@ import { useContext } from "react";
 import { ShopContext } from "../context/ShopContextProvider";
 import { useNavigate } from "react-router-dom";
 import { IoTrashOutline } from "react-icons/io5";
+import { TbShoppingBagSearch } from "react-icons/tb";
+import { RiSecurePaymentLine } from "react-icons/ri";
 
 export default function CartPage() {
   const {cartItems, getTotalCartAmount} = useContext(ShopContext);
@@ -15,7 +17,7 @@ export default function CartPage() {
   
   return (
     <>
-    <div className=" mt-5 flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
         {products.map((product) => {
           if (cartItems[product.id] !== 0) {
             return <CartItem data={product} />;
@@ -23,11 +25,11 @@ export default function CartPage() {
         })}
     </div>
     {totalAmount > 0 ? (
-    <div className="flex items-center justify-between mt-5 p-4 bg-white rounded-lg w-[60vw]">
+    <div className="flex items-center justify-between p-4 bg-white rounded-lg w-[60vw]">
       <p><span className=" font-bold">Total =</span> {totalAmount} SEK</p>
-      <div>
-        <button className="btn mr-3" onClick={() => navigate('/')}>Contiune Shopping</button>
-        <button className="btn">Proceed Checkout</button>
+      <div className=" flex gap-4">
+      <button className="btn flex justify-center gap-1" onClick={() => navigate('/')}> <TbShoppingBagSearch size={20} /><span>Contiune Shopping</span></button>
+        <button className="btn flex justify-center gap-1"><RiSecurePaymentLine size={20} /> <span>Proceed Checkout</span></button>
       </div>
     </div> ) : (
       <h1> Your Shopping Cart is Empty</h1>
@@ -58,7 +60,7 @@ function CartItem(props) {
             </div>
         </div>
       </div>
-      <button onClick={() => removeAllFromCart(id)}><IoTrashOutline size={30} className=" text-cyan-600 hover:text-cyan-950" /></button>
+      <button onClick={() => removeAllFromCart(id)}><IoTrashOutline size={25} className=" text-cyan-600 hover:text-cyan-950" /></button>
       
     </div>
   );

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 
 const Root = ({cartItems}) => {
   return (
-    <div className=" bg-gray-300 h-screen">
+    <div className=" bg-gray-300 h-screen w-screen">
       <Header cartItems={cartItems} />
       <Outlet />
     </div>

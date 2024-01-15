@@ -51,7 +51,7 @@ function CartItem(props) {
             <span className=" font-bold text-lg">{name}</span> - {price} SEK
           </p>
           <div className=" flex gap-2">
-              <button className=" text-xl font-bold text-cyan-600 hover:text-white hover:bg-cyan-600 px-2" onClick={() => removeFromCart(id)}> - </button>
+              <button className="text-xl font-bold text-cyan-600 hover:text-white hover:bg-cyan-600 px-2" onClick={() => removeFromCart(id)}> - </button>
               <input style={{border: '1px solid rgba(9, 146, 177, 0.367)'}} className=" w-10 text-center font-bold border-black border-spacing-2.5 text-cyan-600"
                 value={cartItems[id]}
                 onChange={(e) => updateCartItemCount(Number(e.target.value), id)}

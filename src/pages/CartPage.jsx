@@ -1,34 +1,18 @@
-import { Link } from "react-router-dom";
+
 import { products } from "../data";
 import { useContext } from "react";
 import { ShopContext } from "../context/ShopContextProvider";
+import { useNavigate } from "react-router-dom";
+import { IoTrashOutline } from "react-icons/io5";
 
 export default function CartPage() {
-  const {cartItems, removeFromCart, updateCartItemCount} = useContext(ShopContext);
-  // if (!cartItems.length) {
-  //   return (
-  //     <div>
-  //       <div>No Items in Cart!</div>
-  //       <Link to="/">Back to Home</Link>
-  //     </div>
-  //   );
-  // }
+  const {cartItems, getTotalCartAmount} = useContext(ShopContext);
+  const navigate = useNavigate();
 
-  // return cartItems.map((item) => {
-  //   const foundItem = products.find((product) => {
-  //     return product.id === item.id;
-  //   });
+  const totalAmount = getTotalCartAmount();
 
-  //   if (foundItem) {
-  //     return (
-  //       <CartItem
-  //         count={item.count}
-  //         product={foundItem}
-  //         onAddRemove={onAddRemove}
-  //       />
-  //     );
-  //   } else return undefined;
-  // });
+  console.log('total' , totalAmount);
+  
   return (
     <>
     <div className=" mt-5 flex flex-col gap-4">
@@ -38,40 +22,44 @@ export default function CartPage() {
           }
         })}
     </div>
-    
-    {/* <div className=" flex items-center mt-5 p-8 bg-white rounded-lg w-[50vw]"></div> */}
+    {totalAmount > 0 ? (
+    <div className="flex items-center justify-between mt-5 p-4 bg-white rounded-lg w-[60vw]">
+      <p><span className=" font-bold">Total =</span> {totalAmount} SEK</p>
+      <div>
+        <button className="btn mr-3" onClick={() => navigate('/')}>Contiune Shopping</button>
+        <button className="btn">Proceed Checkout</button>
+      </div>
+    </div> ) : (
+      <h1> Your Shopping Cart is Empty</h1>
+      )}
     </>
   );
 }
 
 function CartItem(props) {
-  const {cartItems, removeFromCart, updateCartItemCount, addToCart} = useContext(ShopContext);
+  const {cartItems, removeFromCart, updateCartItemCount, addToCart, removeAllFromCart} = useContext(ShopContext);
   const { id, name, price, image } = props.data;
 
   return (
-    <div className=" flex items-center p-8 bg-white rounded-lg w-[50vw]">
-      <img className=" border-2 m-1" width={75} height={75} src={image} alt={name} />
-      <div className=" flex flex-col gap-2 ml-5">
-        <p>
-          <span className=" font-bold">{name}</span> - {price} SEK
-        </p>
-        <div className=" flex gap-2">
-            <button onClick={() => removeFromCart(id)}> - </button>
-            <input style={{border: '1px solid black'}} className=" w-10 text-center font-extrabold border-black border-spacing-2.5"
-              value={cartItems[id]}
-              onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
-            />
-            <button onClick={() => addToCart(id)}> + </button>
-          </div>
+    <div className="flex justify-between items-center p-8 bg-white rounded-lg w-[60vw]">
+      <div className=" flex items-center">
+        <img className=" border-2 m-1" width={75} height={75} src={image} alt={name} />
+        <div className=" flex flex-col gap-5 ml-5">
+          <p>
+            <span className=" font-bold text-lg">{name}</span> - {price} SEK
+          </p>
+          <div className=" flex gap-2">
+              <button className=" text-xl font-bold text-cyan-600 hover:text-white hover:bg-cyan-600 px-2" onClick={() => removeFromCart(id)}> - </button>
+              <input style={{border: '1px solid rgba(9, 146, 177, 0.367)'}} className=" w-10 text-center font-bold border-black border-spacing-2.5 text-cyan-600"
+                value={cartItems[id]}
+                onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
+              />
+              <button className=" text-xl font-bold text-cyan-600 hover:text-white hover:bg-cyan-600 px-2" onClick={() => addToCart(id)}> + </button>
+            </div>
+        </div>
       </div>
-      {/* <button
-        style={{ marginLeft: 20 }}
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-      >
-        + Add to cart
-      </button> */}
+      <button onClick={() => removeAllFromCart(id)}><IoTrashOutline size={30} className=" text-cyan-600 hover:text-cyan-950" /></button>
+      
     </div>
   );
 }

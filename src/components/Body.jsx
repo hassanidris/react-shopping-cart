@@ -5,8 +5,8 @@ import { products } from "../data";
 
 function Body({ onAdd }) {
   return (
-    <div style={{margin: '0 auto', width: '60wv'}} className="flex p-5">
-      <div className="flex flex-wrap gap-3">
+    <div style={{margin: '0 auto'}} className="flex p-5 justify-center">
+      <div className=" grid grid-cols-3 gap-3">
       {products.map((product) => {
         const { id } = product;
 

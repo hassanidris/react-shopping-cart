@@ -20,7 +20,7 @@ export default function ItemPage({ handleAddToCart, cartItems }) {
   const { description } = item;
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className=" flex justify-center pt-5">
       <Product product={item} onAdd={handleAddToCart} />
       <div style={{ marginTop: "10em" }}>{description}</div>
     </div>
